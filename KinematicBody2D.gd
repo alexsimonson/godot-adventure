@@ -38,7 +38,6 @@ func get_input():
 	if (Input.is_action_pressed('hold') && !holding) || (Input.is_action_just_released('hold')):
 		holding = !holding
 
-
 func _physics_process(delta):
 	if(!holding):
 		look_at(get_global_mouse_position())
@@ -46,12 +45,7 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity)
 
 func shoot():
-	print('shooting')
 	$Gun.fire()
 
 func local_action():
 	print('checking for local action')
-
-func _on_KinematicBody2D_mouse_entered():
-	print('ay')
-	pass # Replace with function body.
