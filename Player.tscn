@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://KinematicBody2D.gd" type="Script" id=1]
 [ext_resource path="res://main guy 2.png" type="Texture" id=2]
 [ext_resource path="res://gun 2.png" type="Texture" id=3]
+[ext_resource path="res://Pistol Shot.wav" type="AudioStream" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 17.5083
@@ -20,6 +21,7 @@ position = Vector2( 27.6234, 15.8613 )
 scale = Vector2( 0.05, 0.05 )
 
 [node name="Sprite" type="Sprite" parent="KinematicBody2D"]
+editor/display_folded = true
 rotation = -1.5708
 scale = Vector2( 0.167, 0.167 )
 z_index = 2
@@ -33,7 +35,6 @@ z_index = -1
 texture = ExtResource( 3 )
 
 [node name="Camera2D" type="Camera2D" parent="KinematicBody2D"]
-current = true
 zoom = Vector2( 0.5, 0.5 )
 process_mode = 0
 drag_margin_left = 0.0
@@ -53,4 +54,7 @@ rotation = 1.5708
 scale = Vector2( 0.0835, 0.0835 )
 shape = SubResource( 2 )
 disabled = true
+
+[node name="Gunshot" type="AudioStreamPlayer2D" parent="KinematicBody2D"]
+stream = ExtResource( 4 )
 

@@ -2,9 +2,6 @@ extends KinematicBody2D
 
 export var speed = 200
 
-onready var Bullet = preload("res://Bullet.tscn")
-onready var muzzle = get_node('Muzzle')
-
 var velocity = Vector2.ZERO
 
 func _ready():
@@ -37,10 +34,8 @@ func _physics_process(delta):
 
 
 func shoot():
-	var b = Bullet.instance()
-	var world = get_tree().current_scene
-	world.add_child(b)
-	b.transform = muzzle.global_transform
+	print('shooting')
+	$Gun.fire()
 
 func local_action():
 	print('checking for local action')
