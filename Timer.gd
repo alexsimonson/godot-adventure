@@ -15,5 +15,5 @@ func _ready():
 
 
 func _on_Timer_timeout():
-	print('fuck you')
+#	print('fuck you')
 	$Sprite.visible = !$Sprite.visible

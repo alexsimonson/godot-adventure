@@ -16,5 +16,4 @@ position = Vector2( 108.471, 59.4839 )
 position = Vector2( -159.051, 89.3039 )
 
 [node name="PlayerUpdate" parent="." instance=ExtResource( 4 )]
-z_index = 1
 

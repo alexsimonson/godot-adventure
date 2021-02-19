@@ -7,8 +7,8 @@
 radius = 18.2063
 
 [node name="Mob" type="KinematicBody2D" groups=[
-"mobs",
 "minimap_objects",
+"mobs",
 ]]
 script = ExtResource( 1 )
 

@@ -8,19 +8,24 @@
 radius = 18.1446
 height = 9.1935
 
-[node name="PlayerUpdate" type="Node2D"]
+[node name="PlayerUpdate" type="Node2D" groups=[
+"player",
+]]
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+position = Vector2( 4.02096, 3.49648 )
+rotation = -0.0370123
 script = ExtResource( 1 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D" groups=[
+"player",
+]]
 position = Vector2( -1.32868, 0.664335 )
 shape = SubResource( 1 )
 
 [node name="Gun" parent="KinematicBody2D" instance=ExtResource( 2 )]
-position = Vector2( 16.0838, 17.1328 )
+position = Vector2( 17.1385, 16.9969 )
 scale = Vector2( 0.1, 0.1 )
-z_index = -1
 
 [node name="Sprite" type="Sprite" parent="KinematicBody2D"]
 rotation = -1.5708
@@ -30,4 +35,5 @@ texture = ExtResource( 3 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+zoom = Vector2( 0.5, 0.5 )
 
