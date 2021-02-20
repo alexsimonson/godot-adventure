@@ -8,6 +8,7 @@ onready var userInput = userLE.text
 onready var passInput = passLE.text
 onready var loginRTL = get_node("RichTextLabelLogin")
 onready var loggedIn = _set_logged_in_as(false)
+onready var brain = get_parent()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -30,6 +31,9 @@ func _setupInputs():
 	submitButton.focus_previous = passLE.get_path()
 	submitButton.text = "Login"
 	submitButton.connect("pressed", self, "_on_Button_pressed")
+	
+	$ButtonBack.text = "Back"
+	$ButtonBack.connect('pressed', self, '_on_back_pressed')
 
 func _on_Button_pressed():
 	if(userInput!='' && passInput!=''):
@@ -38,10 +42,14 @@ func _on_Button_pressed():
 	else:
 		print('userInput is empty')
 
+func _on_back_pressed():
+	get_tree().change_scene('res://MainMenu.tscn')
+
 func _on_HTTPRequest_request_completed( result, response_code, headers, body ):
 	var json = JSON.parse(body.get_string_from_utf8())
 	if(json.result.auth):
 		print('logged in')
+		brain._set_username('test')
 		_set_logged_in_as(true)
 	else:
 		print('not logged in')

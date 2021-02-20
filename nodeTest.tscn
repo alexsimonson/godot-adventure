@@ -35,6 +35,12 @@ margin_top = 303.0
 margin_right = 595.0
 margin_bottom = 343.0
 
+[node name="ButtonBack" type="Button" parent="CanvasLayer"]
+margin_left = 145.526
+margin_top = 379.842
+margin_right = 284.526
+margin_bottom = 441.842
+
 [connection signal="request_completed" from="CanvasLayer/HTTPRequest" to="CanvasLayer" method="_on_HTTPRequest_request_completed"]
 [connection signal="text_changed" from="CanvasLayer/LineEditUser" to="CanvasLayer" method="_on_LineEditUser_text_changed"]
 [connection signal="text_changed" from="CanvasLayer/LineEditPass" to="CanvasLayer" method="_on_LineEditPass_text_changed"]
