@@ -8,10 +8,11 @@ onready var userInput = userLE.text
 onready var passInput = passLE.text
 onready var loginRTL = get_node("RichTextLabelLogin")
 onready var loggedIn = _set_logged_in_as(false)
-onready var brain = get_parent()
-
+onready var brain = get_parent().get_parent()
+onready var testingBrain = get_tree().get_root()
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	print(testingBrain.username)
 	_setupInputs()
 	_allow_submission_attempt()
 
@@ -37,7 +38,7 @@ func _setupInputs():
 
 func _on_Button_pressed():
 	if(userInput!='' && passInput!=''):
-		var reqURL = 'http://localhost:4000/godot'
+		var reqURL = 'http://localhost:4000/login'
 		http.request(reqURL + '?username=' + userInput + '&password=' + passInput)
 	else:
 		print('userInput is empty')
@@ -47,7 +48,8 @@ func _on_back_pressed():
 
 func _on_HTTPRequest_request_completed( result, response_code, headers, body ):
 	var json = JSON.parse(body.get_string_from_utf8())
-	if(json.result.auth):
+	print(json)
+	if(json):
 		print('logged in')
 		brain._set_username('test')
 		_set_logged_in_as(true)

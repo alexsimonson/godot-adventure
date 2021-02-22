@@ -9,7 +9,15 @@ var holding = false
 var velocity = Vector2.ZERO
 
 func _ready():
+	$Area2D.connect('body_entered', self, '_test_area')
 	print('player ready')
+
+func _test_area(someArea):
+	if(someArea.is_in_group('item')):
+		print('we could pick this fucking item up')
+	if(someArea.is_in_group('mobs')):
+		print('stay away from mobs, dummy')
+	
 
 func get_input():
 	velocity = Vector2()

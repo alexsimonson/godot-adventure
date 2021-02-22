@@ -17,3 +17,6 @@ func _physics_process(delta):
 	if collision:
 		velocity = velocity.bounce(collision.normal).rotated(rand_range(-PI/4, PI/4))
 	rotation = velocity.angle()
+
+func test_fire():
+	print('testing the fire baby')
