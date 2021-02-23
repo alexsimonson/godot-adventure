@@ -9,15 +9,29 @@ var holding = false
 var velocity = Vector2.ZERO
 
 func _ready():
-	$Area2D.connect('body_entered', self, '_test_area')
+	$Area2D.connect('body_entered', self, '_test_body')
+	$Area2D.connect('area_entered', self, '_test_area')
+	$Area2D.connect('mouse_entered', self, '_test_mouse')
 	print('player ready')
 
-func _test_area(someArea):
-	if(someArea.is_in_group('item')):
-		print('we could pick this fucking item up')
+func _test_mouse():
+	print('some bs')
+
+func _test_body(someArea):
 	if(someArea.is_in_group('mobs')):
 		print('stay away from mobs, dummy')
-	
+
+func _test_area(someArea):
+	var parent = someArea.get_parent()
+	if(parent.is_in_group('item')):
+		_pickup_item(parent)
+		print('pickup item')
+		
+func _pickup_item(item):
+	print('Attempting to pickup item', item)
+	print('Identify item: ', item.name)
+	print('Identify data: ', item.data)
+	$Inventory._add_to_inventory(item)
 
 func get_input():
 	velocity = Vector2()
@@ -35,7 +49,8 @@ func get_input():
 	if Input.is_action_just_pressed('local_action'):
 		local_action()
 	if Input.is_action_just_pressed('right_click'):
-		print('nothing yet')
+#		print('nothing yet')
+		print('My inventory: ', $Inventory.inventory)
 
 	if Input.is_action_pressed('sneak') && !sneaking:
 		sneaking = true

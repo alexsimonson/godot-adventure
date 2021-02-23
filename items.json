@@ -1,0 +1,22 @@
+{
+  "Coin": {
+    "ItemWeight": 1,
+    "ItemType": null,
+    "ItemStackable": true
+  },
+  "Leather Boot": {
+    "ItemWeight": 3,
+    "ItemType": "equipment",
+    "ItemStackable": false
+  },
+  "Iron Helmet": {
+    "ItemWeight": 5,
+    "ItemType": "equipment",
+    "ItemStackable": false
+  },
+  "Steel Sword": {
+    "ItemWeight": 4,
+    "ItemType": "weapon",
+    "ItemStackable": false
+  }
+}

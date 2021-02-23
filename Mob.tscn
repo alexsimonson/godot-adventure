@@ -7,8 +7,8 @@
 radius = 18.2063
 
 [node name="Mob" type="KinematicBody2D" groups=[
-"minimap_objects",
 "mobs",
+"minimap_objects",
 ]]
 script = ExtResource( 1 )
 
@@ -19,3 +19,4 @@ region_rect = Rect2( 426, 0, 33, 43 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+
