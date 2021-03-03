@@ -14,7 +14,7 @@ func _start_game_pressed():
 	get_tree().change_scene("res://TestingScene.tscn")
 
 func _login_pressed():
-	get_tree().change_scene('res://nodeTest.tscn')
+	get_tree().change_scene('res://AuthScreen.tscn')
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

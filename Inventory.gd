@@ -13,7 +13,7 @@ func _ready():
 func _add_to_inventory(item):
 	print('new item for inventory', item)
 #	add_child(item)
-#	inventory.append(item)
+	inventory.append(item)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

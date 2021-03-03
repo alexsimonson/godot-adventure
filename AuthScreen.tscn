@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://CanvasLayer.gd" type="Script" id=1]
+[ext_resource path="res://AuthScreen.gd" type="Script" id=1]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -9,11 +9,11 @@ anchor_bottom = 1.0
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 script = ExtResource( 1 )
 
-[node name="ButtonSubmit" type="Button" parent="CanvasLayer"]
-margin_left = 355.0
-margin_top = 183.0
-margin_right = 494.0
-margin_bottom = 245.0
+[node name="ButtonLogin" type="Button" parent="CanvasLayer"]
+margin_left = 251.0
+margin_top = 233.0
+margin_right = 390.0
+margin_bottom = 295.0
 
 [node name="HTTPRequest" type="HTTPRequest" parent="CanvasLayer"]
 
@@ -29,17 +29,43 @@ margin_top = 135.0
 margin_right = 515.0
 margin_bottom = 166.0
 
+[node name="LineEditConfirm" type="LineEdit" parent="CanvasLayer"]
+margin_left = 332.0
+margin_top = 178.0
+margin_right = 515.0
+margin_bottom = 209.0
+
 [node name="RichTextLabelLogin" type="RichTextLabel" parent="CanvasLayer"]
 margin_left = 258.0
 margin_top = 303.0
 margin_right = 595.0
 margin_bottom = 343.0
 
+[node name="RichTextLabelStatus" type="RichTextLabel" parent="CanvasLayer"]
+margin_left = 290.377
+margin_top = 486.47
+margin_right = 627.377
+margin_bottom = 526.47
+
+[node name="RichTextLabelTitle" type="RichTextLabel" parent="CanvasLayer"]
+margin_left = 260.377
+margin_top = 22.4697
+margin_right = 597.377
+margin_bottom = 62.4697
+
 [node name="ButtonBack" type="Button" parent="CanvasLayer"]
 margin_left = 145.526
 margin_top = 379.842
 margin_right = 284.526
 margin_bottom = 441.842
+
+[node name="ButtonRegister" type="Button" parent="CanvasLayer"]
+margin_left = 438.564
+margin_top = 232.7
+margin_right = 577.564
+margin_bottom = 294.7
+
 [connection signal="request_completed" from="CanvasLayer/HTTPRequest" to="CanvasLayer" method="_on_HTTPRequest_request_completed"]
 [connection signal="text_changed" from="CanvasLayer/LineEditUser" to="CanvasLayer" method="_on_LineEditUser_text_changed"]
 [connection signal="text_changed" from="CanvasLayer/LineEditPass" to="CanvasLayer" method="_on_LineEditPass_text_changed"]
+[connection signal="text_changed" from="CanvasLayer/LineEditConfirm" to="CanvasLayer" method="_on_LineEditPass_text_changed"]
