@@ -9,7 +9,7 @@ func _ready():
 	var item_data_json = JSON.parse(item_data_file.get_as_text())
 	item_data_file.close()
 	item_data = item_data_json.result
-	print('item_data', item_data)
-	for key in item_data:
-		print('key: ', key, ' - value: ', item_data[key])
-		print('Weight of ', key, ' - ', item_data[key].ItemWeight)
+	# print('item_data', item_data)
+	# for key in item_data:
+		# print('key: ', key, ' - value: ', item_data[key])
+		# print('Weight of ', key, ' - ', item_data[key].ItemWeight)
