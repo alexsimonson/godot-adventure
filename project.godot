@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "Mob",
 "language": "GDScript",
-"path": "res://Mob.gd"
+"path": "res://Scripts/Mob.gd"
 } ]
 _global_script_class_icons={
 "Mob": ""
@@ -21,12 +21,12 @@ _global_script_class_icons={
 [application]
 
 config/name="Adventure"
-run/main_scene="res://InventoryTest.tscn"
-config/icon="res://icon.png"
+run/main_scene="res://Scenes/Main.tscn"
+config/icon="res://Old Art/icon.png"
 
 [autoload]
 
-ItemHub="*res://ItemHub.gd"
+ItemHub="*res://Scripts/ItemHub.gd"
 
 [input]
 
@@ -85,4 +85,4 @@ hold={
 quality/driver/driver_name="GLES2"
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
-environment/default_environment="res://default_env.tres"
+environment/default_environment="res://Old Art/default_env.tres"
