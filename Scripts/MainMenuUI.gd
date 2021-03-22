@@ -11,7 +11,7 @@ func _start_game_pressed():
 	# var basicLevelResource = load(basicLevel)
 	# var test = basicLevelResource.instance()
 	get_node('/root/Main/CurrentSceneContainer').add_child(simultaneous_scene)
-#	self.get_parent().remove_child(self)
+	self.get_parent().remove_child(self)
 
 func _login_pressed():
 	# this appropriately swaps out the scene I need to swap

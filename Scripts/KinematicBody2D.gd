@@ -8,7 +8,7 @@ var holding = false
 
 var velocity = Vector2.ZERO
 
-#onready var Inventory = get_parent().get_child(1)
+onready var Inventory = get_parent().get_child(1)
 
 func _ready():
 	$Area2D.connect('body_entered', self, '_test_body')
@@ -47,7 +47,9 @@ func get_input():
 		velocity.y -= 1
 	velocity = velocity.normalized() * speed
 	if Input.is_action_just_pressed('click'):
-		shoot()
+		# I might need to use a specific boolean here instead.  Will find out in time.
+		if(!Inventory.hudInventory.visible):
+			shoot()
 	if Input.is_action_just_pressed('local_action'):
 		local_action()
 	if Input.is_action_just_pressed('right_click'):
@@ -62,6 +64,9 @@ func get_input():
 		sneaking = false
 	if (Input.is_action_pressed('hold') && !holding) || (Input.is_action_just_released('hold')):
 		holding = !holding
+	if (Input.is_action_just_pressed('inventory')):
+		print('toggle inventory on/off')
+		Inventory.hudInventory.visible = !Inventory.hudInventory.visible
 
 func _physics_process(delta):
 	if(!holding):

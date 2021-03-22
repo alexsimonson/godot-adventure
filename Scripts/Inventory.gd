@@ -8,6 +8,7 @@ const gunIcon = preload('res://Icons/pistol-gun.png')
 const gridSlot = preload('res://Scenes/GridSlot.tscn')
 
 const InventoryUIScript = preload('res://Scripts/InventoryUI.gd')
+var hudInventory = null
 
 func _ready():
 	create_inventory_ui()
@@ -43,4 +44,6 @@ func create_inventory_ui():
 			slot.fillSlot = true
 		grid.add_child(slot)
 	gui.add_child(inventoryRoot)
+	hudInventory = inventoryRoot
+	hudInventory.visible = false
 	print('did it')
