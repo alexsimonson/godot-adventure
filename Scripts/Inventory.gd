@@ -1,49 +1,46 @@
-extends Panel
-var isDragging = false
-var draggingElement = null
-var ogElement = null
-var ogPosition = null
-var ogContainer = null
-var ogSet = false
-export(int) var numSlots
-onready var yeGC = $ScrollContainer/GridContainer
+extends Node
 
+onready var gui = get_node('/root/Main/GUI')
+export(int) var numSlots
 const emptyIcon = preload('res://Icons/plain-square.png')
 const gunIcon = preload('res://Icons/pistol-gun.png')
 
 const gridSlot = preload('res://Scenes/GridSlot.tscn')
 
+const InventoryUIScript = preload('res://Scripts/InventoryUI.gd')
+
 func _ready():
+	create_inventory_ui()
+	# this will need to instantiate an InventoryUI onto the GUI
+	var inventoryUIResource = load('res://Scenes/InventoryUI.tscn')
+	var inventoryUI = inventoryUIResource.instance()
+#	gui.add_child(inventoryUI)
+
+func create_inventory_ui():
+	# this will be responsible for creating the nodes from scratch
+	var inventoryRoot = Panel.new()
+	inventoryRoot.set_script(InventoryUIScript)
+	inventoryRoot.set_name('Inventory')
+	inventoryRoot.margin_right = 360
+	inventoryRoot.margin_bottom = 350
+	inventoryRoot.rect_size = Vector2(360, 350)
+	inventoryRoot.add_child(ScrollContainer.new())
+	var sc = inventoryRoot.get_child(0)
+	sc.set_name('ScrollContainer')
+	sc.margin_left = 6
+	sc.margin_top = 17
+	sc.margin_right = 294
+	sc.margin_bottom = 278
+	sc.rect_position = Vector2(6, 17)
+	sc.rect_size = Vector2(288, 261)
+	var grid = GridContainer.new()
+	grid.set_name('GridContainer')
+	grid.columns = 3
+	sc.add_child(grid)
 	for n in numSlots:
-		yeGC.add_child(gridSlot.instance())
-
-func _process(delta):
-	if(isDragging && draggingElement != null):
-#		draggingElement.rect_position = get_global_mouse_position() # this is now a new sprite
-		draggingElement.set_position(get_global_mouse_position())
-
-
-func _on_TextureRect_focus_entered():
-	print('focus entered')
-	
-func setOGPosition(element):
-	print('setting og')
-#	draggingElement = element # if I set this here... it drags fine
-	ogElement = element # if I set this, and try to set draggingElement later it doesn't work
-	ogPosition = element.rect_position
-	ogContainer = element.get_parent()
-	ogSet = true
-
-func resetPosition():
-	print('resetting position')
-	if(draggingElement):
-		self.remove_child(draggingElement)
-#		draggingElement.rect_position = ogPosition
-		draggingElement = null
-#		ogPosition = null
-#		ogContainer = null
-#		ogElement.texture = gunIcon
-#		ogSet = false
-
-func _add_to_inventory(item):
-	print('supposed to add to inventory eventually')
+		var slot = gridSlot.instance()
+		if(n==1):
+			slot.fillSlot = true
+		grid.add_child(slot)
+	gui.add_child(inventoryRoot)
+	print('did it')

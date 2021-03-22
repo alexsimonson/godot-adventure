@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/KinematicBody2D.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Gun.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Old Art/main guy 2.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/Inventory.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -49,4 +50,7 @@ drag_margin_left = 0.0
 drag_margin_top = 0.0
 drag_margin_right = 0.0
 drag_margin_bottom = 0.0
+
+[node name="Inventory" parent="." instance=ExtResource( 4 )]
+numSlots = 5
 

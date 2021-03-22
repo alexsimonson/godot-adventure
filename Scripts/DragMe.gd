@@ -1,10 +1,13 @@
 extends TextureRect
 
-onready var itemSlots = self.get_parent().get_parent().get_parent().get_parent()
+onready var itemSlots = get_node('/root/Main/GUI/Inventory')
 onready var container = self.get_parent()
 
+func _ready():
+	print('name of', itemSlots.name)
+
 func _on_DragMe_mouse_entered():
-	if(!container.thisSlot):
+	if(!container.fillSlot):
 		itemSlots.setOGPosition(self)
 
 func _on_DragMe_gui_input(event):
@@ -13,17 +16,17 @@ func _on_DragMe_gui_input(event):
 			if(itemSlots.isDragging):
 				itemSlots.isDragging = false
 				itemSlots.resetPosition()
-				container.thisSlot = true
+				container.fillSlot = true
 				container.set_texture()
 			else:				
 				if(itemSlots.ogSet):
-					if(container.thisSlot):
+					if(container.fillSlot):
 						print('there is something in this slot')
 						itemSlots.draggingElement = Sprite.new()
 						itemSlots.draggingElement.texture = itemSlots.gunIcon
 						itemSlots.add_child(itemSlots.draggingElement)
 						itemSlots.ogElement.texture = itemSlots.emptyIcon
-						container.thisSlot = false
+						container.fillSlot = false
 						container.set_texture()
 						itemSlots.isDragging = true
 					else:

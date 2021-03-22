@@ -2,18 +2,6 @@
 
 [ext_resource path="res://Scripts/Inventory.gd" type="Script" id=1]
 
-[node name="Inventory" type="Panel"]
-margin_right = 360.0
-margin_bottom = 350.0
+[node name="Inventory" type="Control"]
 script = ExtResource( 1 )
-numSlots = 50
-
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
-margin_left = 6.0
-margin_top = 17.0
-margin_right = 294.0
-margin_bottom = 278.0
-
-[node name="GridContainer" type="GridContainer" parent="ScrollContainer"]
-columns = 5
 

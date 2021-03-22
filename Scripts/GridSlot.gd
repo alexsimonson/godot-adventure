@@ -1,8 +1,7 @@
 extends CenterContainer
 
-onready var itemSlots = self.get_parent().get_parent().get_parent()
 onready var dragMe = self.get_child(0)
-export(bool) var thisSlot
+export(bool) var fillSlot # set to true to populate with an item
 
 const emptyIcon = preload('res://Icons/plain-square.png')
 const gunIcon = preload('res://Icons/pistol-gun.png')
@@ -12,7 +11,7 @@ func _ready():
 	set_texture()
 
 func set_texture():
-	if(thisSlot):
+	if(fillSlot):
 		dragMe.texture = gunIcon
 	else:
 		dragMe.texture = emptyIcon
