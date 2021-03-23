@@ -10,12 +10,24 @@ const gridSlot = preload('res://Scenes/GridSlot.tscn')
 const InventoryUIScript = preload('res://Scripts/InventoryUI.gd')
 var hudInventory = null
 
+var gridGUI = null
+
+# let's try tracking some data here
+var itemSlots = [] # this will be a fairly large data array
+
+
+
 func _ready():
+	for n in numSlots:
+		var itemSlot = {
+			"item": null,
+			"slot": null,
+		}
+		itemSlots.append(itemSlot)
 	create_inventory_ui()
 	# this will need to instantiate an InventoryUI onto the GUI
 	var inventoryUIResource = load('res://Scenes/InventoryUI.tscn')
 	var inventoryUI = inventoryUIResource.instance()
-#	gui.add_child(inventoryUI)
 
 func create_inventory_ui():
 	# this will be responsible for creating the nodes from scratch
@@ -40,10 +52,40 @@ func create_inventory_ui():
 	sc.add_child(grid)
 	for n in numSlots:
 		var slot = gridSlot.instance()
-		if(n==1):
+		#this essentially simulates having a gun in our posession
+		if(n==0):
 			slot.fillSlot = true
+			itemSlots[n].item = true
+		else:
+			slot.fillSlot = false
+			itemSlots[n].item = false
+		itemSlots[n].slot = slot
 		grid.add_child(slot)
 	gui.add_child(inventoryRoot)
 	hudInventory = inventoryRoot
 	hudInventory.visible = false
-	print('did it')
+	gridGUI = grid
+	print('inventory gui created', itemSlots)
+
+func _add_to_inventory(item):
+	# this works but it just appends a new slot to the inventory
+	# should actually cycle through all of the nodes to find empty slot
+	# this is quickly becoming difficult to expand on...
+	# it would be easier to track the data independently from the gui
+	# the obviously build the gui from the tracked data
+	# Where should I track the data?
+	print('Identify item: ', item.name)
+	print('Identify data: ', item.data)
+	var added = false
+	for n in numSlots:
+		# if slot doesn't have item, add item to slot
+		if(itemSlots[n].item==false):
+			print('we found an empty slot')
+			# I may have overcomplicated this but it's working right now
+			itemSlots[n].item = true
+			itemSlots[n].slot.fillSlot = true
+			itemSlots[n].slot.set_texture()
+			added = true
+			break
+	if(!added):
+		print('Your inventory must be full')

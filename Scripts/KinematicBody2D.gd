@@ -1,3 +1,5 @@
+# this script is currently the Player script...
+# should separate things out accordingly
 extends KinematicBody2D
 
 export var speed = 200
@@ -5,35 +7,57 @@ export var sneakModifier = 2
 
 var sneaking = false
 var holding = false
+var endangeringSelf = false
 
 var velocity = Vector2.ZERO
 
 onready var Inventory = get_parent().get_child(1)
 
+var canInteract = false
+var pickupItem = null
+
 func _ready():
 	$Area2D.connect('body_entered', self, '_test_body')
-	$Area2D.connect('area_entered', self, '_test_area')
-	$Area2D.connect('mouse_entered', self, '_test_mouse')
+	$Area2D.connect('area_entered', self, '_area_entered')
+	$Area2D.connect('area_exited', self, '_area_exited')
+	$Area2D.connect('mouse_entered', self, '_endanger_self')
+	$Area2D.connect('mouse_exited', self, '_unendanger_self')
 	print('player ready')
 
-func _test_mouse():
-	print('some bs')
+func _physics_process(delta):
+	if(!holding):
+		look_at(get_global_mouse_position())
+	get_input()
+	velocity = move_and_slide(velocity)
+
+func _endanger_self():
+	print('endangered self')
+	endangeringSelf = true
+
+func _unendanger_self():
+	print('unendangered self')
+	endangeringSelf = false
 
 func _test_body(someArea):
 	if(someArea.is_in_group('mobs')):
 		print('stay away from mobs, dummy')
 
-func _test_area(someArea):
+func _area_entered(someArea):
+	# logic should be created to prioritize areas, etc.
 	var parent = someArea.get_parent()
 	if(parent.is_in_group('item')):
-		_pickup_item(parent)
-		print('pickup item')
+		# canInteract will control the gui tooltip mostly
+		canInteract = true
+		print('Could pickup this item')
+		pickupItem = parent
+
+func _area_exited(someArea):
+	canInteract = false
+	pickupItem = null
 		
 func _pickup_item(item):
-	print('Attempting to pickup item', item)
-	print('Identify item: ', item.name)
-	print('Identify data: ', item.data)
-#	Inventory._add_to_inventory(item)
+	print('Attempting to pickup item here')
+	Inventory._add_to_inventory(item)
 
 func get_input():
 	velocity = Vector2()
@@ -67,12 +91,8 @@ func get_input():
 	if (Input.is_action_just_pressed('inventory')):
 		print('toggle inventory on/off')
 		Inventory.hudInventory.visible = !Inventory.hudInventory.visible
-
-func _physics_process(delta):
-	if(!holding):
-		look_at(get_global_mouse_position())
-	get_input()
-	velocity = move_and_slide(velocity)
+	if (Input.is_action_just_pressed('interact') && canInteract):
+		_pickup_item(pickupItem)
 
 func shoot():
 	$Gun.fire()

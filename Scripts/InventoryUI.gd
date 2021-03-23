@@ -45,6 +45,3 @@ func resetPosition():
 #		ogContainer = null
 #		ogElement.texture = gunIcon
 #		ogSet = false
-
-func _add_to_inventory(item):
-	print('supposed to add to inventory eventually')
