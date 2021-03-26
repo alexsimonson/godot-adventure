@@ -12,10 +12,7 @@ export var data = {
 func _ready():
 	pass # Replace with function body.
 
-
-func _pickup_item(test):
-	print('getting picked up', test.get_parent().data.test)
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
+# pickup item
+func _handle_interaction(interacted):
+	interacted.get_child(1)._add_to_inventory(self)
+	self.queue_free()

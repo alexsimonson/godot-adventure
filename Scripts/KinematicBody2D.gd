@@ -74,11 +74,8 @@ func get_input():
 		# I might need to use a specific boolean here instead.  Will find out in time.
 		if(!Inventory.hudInventory.visible):
 			shoot()
-	if Input.is_action_just_pressed('local_action'):
-		local_action()
 	if Input.is_action_just_pressed('right_click'):
-		print('nothing yet')
-#		print('My inventory: ', Inventory.inventory)
+		print('nothing yet on right click')
 
 	if Input.is_action_pressed('sneak') && !sneaking:
 		sneaking = true
@@ -92,10 +89,8 @@ func get_input():
 		print('toggle inventory on/off')
 		Inventory.hudInventory.visible = !Inventory.hudInventory.visible
 	if (Input.is_action_just_pressed('interact') && canInteract):
-		_pickup_item(pickupItem)
+		print('calling fuckin')
+		pickupItem._handle_interaction(self.get_parent())
 
 func shoot():
 	$Gun.fire()
-
-func local_action():
-	print('checking for local action')
