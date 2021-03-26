@@ -52,13 +52,8 @@ func create_inventory_ui():
 	sc.add_child(grid)
 	for n in numSlots:
 		var slot = gridSlot.instance()
-		#this essentially simulates having a gun in our posession
-		if(n==0):
-			slot.fillSlot = true
-			itemSlots[n].item = true
-		else:
-			slot.fillSlot = false
-			itemSlots[n].item = false
+		slot.fillSlot = false
+		itemSlots[n].item = false
 		itemSlots[n].slot = slot
 		grid.add_child(slot)
 	gui.add_child(inventoryRoot)

@@ -4,12 +4,17 @@ export var data = {
 	"another": "test"
 }
 
+const gunIcon = preload('res://Icons/pistol-gun.png')
+
+onready var spr = self.get_child(0)
+
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	spr.texture = gunIcon
 	pass # Replace with function body.
 
 # pickup item
