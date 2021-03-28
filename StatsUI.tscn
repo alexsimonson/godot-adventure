@@ -1,0 +1,43 @@
+[gd_scene format=2]
+
+[node name="StatsUI" type="Panel"]
+margin_left = 784.702
+margin_top = 270.751
+margin_right = 1015.7
+margin_bottom = 472.751
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+margin_left = 33.6843
+margin_top = 25.2632
+margin_right = 198.684
+margin_bottom = 171.263
+
+[node name="GridContainer" type="GridContainer" parent="ScrollContainer"]
+margin_right = 43.0
+margin_bottom = 44.0
+columns = 2
+
+[node name="Button" type="Button" parent="ScrollContainer/GridContainer"]
+margin_right = 39.0
+margin_bottom = 20.0
+text = "Test"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ScrollContainer/GridContainer"]
+margin_left = 43.0
+margin_right = 43.0
+margin_bottom = 20.0
+text = "TEst"
+
+[node name="Button2" type="Button" parent="ScrollContainer/GridContainer"]
+margin_top = 24.0
+margin_right = 39.0
+margin_bottom = 44.0
+text = "Test"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="ScrollContainer/GridContainer"]
+margin_left = 43.0
+margin_top = 24.0
+margin_right = 43.0
+margin_bottom = 44.0
+text = "TEst"
+
