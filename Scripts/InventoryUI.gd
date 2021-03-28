@@ -1,6 +1,7 @@
 extends Panel
 var isDragging = false
 var draggingElement = null
+var draggingTexture = null
 var ogElement = null
 var ogPosition = null
 var ogContainer = null
@@ -33,6 +34,7 @@ func setOGPosition(element):
 	ogElement = element # if I set this, and try to set draggingElement later it doesn't work
 	ogPosition = element.rect_position
 	ogContainer = element.get_parent()
+	print('element texture', element.texture)
 	ogSet = true
 
 func resetPosition():

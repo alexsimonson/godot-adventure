@@ -1,34 +1,41 @@
 extends TextureRect
 
-onready var itemSlots = get_node('/root/Main/GUI/Inventory')
+onready var Inventory = get_node('/root/Main/GUI/Inventory')
 onready var container = self.get_parent()
 
 func _ready():
-	print('name of', itemSlots.name)
+	print('name of', Inventory.name)
 
 func _on_DragMe_mouse_entered():
 	if(!container.fillSlot):
-		itemSlots.setOGPosition(self)
+		Inventory.setOGPosition(self)
 
 func _on_DragMe_gui_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT && event.pressed:
-			if(itemSlots.isDragging):
-				itemSlots.isDragging = false
-				itemSlots.resetPosition()
-				container.fillSlot = true
-				container.set_texture()
+			if(Inventory.isDragging):
+				# need to determine if slot is full or not.
+				if(container.fillSlot):
+					print('we should exchange items')
+				else:
+					print('we should drop this item in this slot')
+					Inventory.isDragging = false
+					Inventory.resetPosition()
+					container.fillSlot = true
+					container.set_texture(Inventory.draggingTexture, true)
 			else:				
-				if(itemSlots.ogSet):
+				if(Inventory.ogSet):
 					if(container.fillSlot):
 						print('there is something in this slot')
-						itemSlots.draggingElement = Sprite.new()
-						itemSlots.draggingElement.texture = itemSlots.gunIcon
-						itemSlots.add_child(itemSlots.draggingElement)
-						itemSlots.ogElement.texture = itemSlots.emptyIcon
+						print('texture: ', container.dragMe.texture)
+						Inventory.draggingElement = Sprite.new()
+						Inventory.draggingTexture = container.dragMe.texture
+						Inventory.draggingElement.texture = Inventory.draggingTexture
+						Inventory.add_child(Inventory.draggingElement)
+						Inventory.ogElement.texture = Inventory.emptyIcon
 						container.fillSlot = false
 						container.set_texture()
-						itemSlots.isDragging = true
+						Inventory.isDragging = true
 					else:
 						print('nothing in this slot!')
 		elif event.button_index == BUTTON_RIGHT && !event.pressed:

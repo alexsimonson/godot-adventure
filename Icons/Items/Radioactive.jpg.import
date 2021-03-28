@@ -1,0 +1,34 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/Radioactive.jpg-48ecaba8a4daddde1e3bc7e5cb0dc81e.stex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://Icons/Items/Radioactive.jpg"
+dest_files=[ "res://.import/Radioactive.jpg-48ecaba8a4daddde1e3bc7e5cb0dc81e.stex" ]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=true
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+stream=false
+size_limit=0
+detect_3d=true
+svg/scale=1.0

@@ -4,17 +4,16 @@ export var data = {
 	"another": "test"
 }
 
-const gunIcon = preload('res://Icons/pistol-gun.png')
+# how do I access itemHub here?
+onready var itemHub = get_node('/root/ItemHub')
 
 onready var spr = self.get_child(0)
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var randomItem = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	spr.texture = gunIcon
+	randomItem = itemHub._random_item()
+	spr.texture = load(randomItem.itemTexture)
 	pass # Replace with function body.
 
 # pickup item

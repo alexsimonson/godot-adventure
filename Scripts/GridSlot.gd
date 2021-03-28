@@ -10,8 +10,11 @@ func _ready():
 	self.set_size(Vector2(64, 64))
 	set_texture()
 
-func set_texture():
+func set_texture(itemTexture=null, setByObject=false):
 	if(fillSlot):
-		dragMe.texture = gunIcon
+		if(setByObject):
+			dragMe.texture = itemTexture
+		else:
+			dragMe.texture = load(itemTexture)
 	else:
 		dragMe.texture = emptyIcon

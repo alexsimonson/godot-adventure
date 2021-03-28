@@ -2,7 +2,8 @@ extends Node
 
 onready var gui = get_node('/root/Main/GUI')
 export(int) var numSlots
-const emptyIcon = preload('res://Icons/plain-square.png')
+const emptyIconLocation = 'res://Icons/plain-square.png'
+const emptyIcon = preload(emptyIconLocation)
 const gunIcon = preload('res://Icons/pistol-gun.png')
 
 const gridSlot = preload('res://Scenes/GridSlot.tscn')
@@ -22,6 +23,7 @@ func _ready():
 		var itemSlot = {
 			"item": null,
 			"slot": null,
+			"textureLocation": null
 		}
 		itemSlots.append(itemSlot)
 	create_inventory_ui()
@@ -55,6 +57,7 @@ func create_inventory_ui():
 		slot.fillSlot = false
 		itemSlots[n].item = false
 		itemSlots[n].slot = slot
+		itemSlots[n].textureLocation = emptyIconLocation
 		grid.add_child(slot)
 	gui.add_child(inventoryRoot)
 	hudInventory = inventoryRoot
@@ -76,10 +79,12 @@ func _add_to_inventory(item):
 		# if slot doesn't have item, add item to slot
 		if(itemSlots[n].item==false):
 			print('we found an empty slot')
+
 			# I may have overcomplicated this but it's working right now
 			itemSlots[n].item = true
 			itemSlots[n].slot.fillSlot = true
-			itemSlots[n].slot.set_texture()
+			itemSlots[n].slot.set_texture(item.randomItem.itemTexture)
+			itemSlots[n].textureLocation = item.randomItem.itemTexture
 			added = true
 			break
 	if(!added):

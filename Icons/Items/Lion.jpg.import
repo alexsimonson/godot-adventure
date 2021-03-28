@@ -1,0 +1,34 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/Lion.jpg-fe833c5a96ab3962d969894d023c9c09.stex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://Icons/Items/Lion.jpg"
+dest_files=[ "res://.import/Lion.jpg-fe833c5a96ab3962d969894d023c9c09.stex" ]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=true
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+stream=false
+size_limit=0
+detect_3d=true
+svg/scale=1.0
