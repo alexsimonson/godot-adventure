@@ -21,7 +21,6 @@ func _ready():
 
 func _process(delta):
 	if(isDragging && draggingElement != null):
-#		draggingElement.rect_position = get_global_mouse_position() # this is now a new sprite
 		draggingElement.set_position(get_global_mouse_position())
 
 
@@ -29,21 +28,13 @@ func _on_TextureRect_focus_entered():
 	print('focus entered')
 	
 func setOGPosition(element):
-	print('setting og')
-#	draggingElement = element # if I set this here... it drags fine
-	ogElement = element # if I set this, and try to set draggingElement later it doesn't work
+	ogElement = element
 	ogPosition = element.rect_position
 	ogContainer = element.get_parent()
-	print('element texture', element.texture)
 	ogSet = true
 
 func resetPosition():
 	print('resetting position')
 	if(draggingElement):
 		self.remove_child(draggingElement)
-#		draggingElement.rect_position = ogPosition
 		draggingElement = null
-#		ogPosition = null
-#		ogContainer = null
-#		ogElement.texture = gunIcon
-#		ogSet = false

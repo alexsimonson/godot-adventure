@@ -1,0 +1,54 @@
+{
+    "StartCooksAssistantQuestConversation": {
+        "conversationNPC": "Chef Guy",
+        "conversationStart": {
+            "dialogue": "Help me make cake?",
+            "logic": "npcTalking",
+            "next_logic": "playerDecision",
+            "next": {
+                "logic": "playerDecision",
+                "options": [
+                    {
+                        "dialogue": "I choose death before I help you make a cake.",
+                        "logic": null
+                    },
+                    {
+                        "dialogue": "I will demolish by ego if I try to help you.",
+                        "logic": null
+                    },
+                    {
+                        "dialogue": "I will forge my own path, and help you cook.",
+                        "logic": "playerDecision",
+                        "next_logic": "npcTalking",
+                        "next": {
+                            "dialogue": "This is fantastic news.  I need you to fetch me these things.  Ok?",
+                            "logic": "npcTalking",
+                            "next_logic": "playerDecision",
+                            "next": {
+                                "logic": "playerDecision",
+                                "options": [
+                                    {
+                                        "dialogue": "I'll get on that...",
+                                        "logic": "npcTalking",
+                                        "next_logic": "accept",
+                                        "next": {
+                                            "logic": "accept"
+                                        }
+                                    },
+                                    {
+                                        "dialogue": "Momentarily, I just remembered I have something to be doing...",
+                                        "logic": "remind"
+                                    },
+                                    {
+                                        "dialogue": "Nah, fuck you.",
+                                        "logic": null
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}

@@ -2,21 +2,23 @@ extends Node2D
 
 var item_data
 var numItems
+
+var dialogueData
 # basic interfacing with a file to read and utilize JSON
 func _ready():
-	_setup_items_by_file()
-	print('numItems: ', numItems)
+	_setup_items_by_file('res://sampleItems.json', 'item') # this is for items
+	_setup_items_by_file('res://dialogue.json', 'dialogue') # this is for items
 
-func _setup_items_by_file():
-	var item_data_file = File.new()
-	item_data_file.open('res://sampleItems.json', File.READ)
-	var item_data_json = JSON.parse(item_data_file.get_as_text())
-	item_data_file.close()
-	item_data = item_data_json.result
-	numItems = item_data.size()
-	# for key in item_data:
-		# print('key: ', key, ' - value: ', item_data[key])
-		# print('Weight of ', key, ' - ', item_data[key].ItemWeight)
+func _setup_items_by_file(filePath, type):
+	var fileData = File.new()
+	fileData.open(filePath, File.READ)
+	var data_json = JSON.parse(fileData.get_as_text())
+	fileData.close()
+	if(type=='item'):
+		item_data = data_json.result
+		numItems = item_data.size()
+	elif(type=='dialogue'):
+		dialogueData = data_json.result
 
 func _random_item():
 	# get random number between 0 and size

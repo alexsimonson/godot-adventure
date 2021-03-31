@@ -7,6 +7,10 @@ func _ready():
 	$StartGameButton.connect("pressed", self, "_start_game_pressed")
 	$LoginButton.connect('pressed', self, '_login_pressed')
 
+	$StartGameButton.grab_focus()
+	$StartGameButton.focus_mode = Control.FOCUS_ALL
+	# It would be really nice to press enter to play game :)
+
 func _start_game_pressed():
 	# var basicLevelResource = load(basicLevel)
 	# var test = basicLevelResource.instance()

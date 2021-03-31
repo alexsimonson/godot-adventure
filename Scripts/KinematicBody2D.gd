@@ -13,8 +13,12 @@ var velocity = Vector2.ZERO
 
 onready var Inventory = get_parent().get_child(1)
 
+# this bool should be enough, PROVIDED that all my interaction OBJECTS have a class with the same name which they should because OOP
 var canInteract = false
-var pickupItem = null
+var itemInteract = false
+var npcInteract = false
+
+var interactObj = null
 
 func _ready():
 	$Area2D.connect('body_entered', self, '_test_body')
@@ -44,16 +48,23 @@ func _test_body(someArea):
 
 func _area_entered(someArea):
 	# logic should be created to prioritize areas, etc.
-	var parent = someArea.get_parent()
-	if(parent.is_in_group('item')):
+	interactObj = someArea.get_parent()
+	canInteract = true
+	if(interactObj.is_in_group('item')):
 		# canInteract will control the gui tooltip mostly
-		canInteract = true
 		print('Could pickup this item')
-		pickupItem = parent
+		itemInteract = true
+	elif(interactObj.is_in_group('npc')):
+		print('we should talk to this cunt')
+		npcInteract = true
 
 func _area_exited(someArea):
+	# the logic here is causing bugs... figure out a better solution!
+	# is it possible to rescan the areas?  PROBABLY
 	canInteract = false
-	pickupItem = null
+	interactObj = null
+	itemInteract = false
+	itemInteract = false
 		
 func _pickup_item(item):
 	print('Attempting to pickup item here')
@@ -90,7 +101,11 @@ func get_input():
 		Inventory.hudInventory.visible = !Inventory.hudInventory.visible
 	if (Input.is_action_just_pressed('interact') && canInteract):
 		print('calling fuckin')
-		pickupItem._handle_interaction(self.get_parent())
+		# item interaction passes self, we should branch because of that...
+		if(itemInteract):
+			interactObj._handle_interaction(self.get_parent())
+		elif(npcInteract):
+			interactObj._handle_interaction()
 
 func shoot():
 	$Gun.fire()

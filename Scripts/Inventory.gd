@@ -63,7 +63,6 @@ func _add_to_inventory(item):
 	for n in numSlots:
 		# if slot doesn't have item, add item to slot
 		if(itemSlots[n].item==false):
-			print('we found an empty slot')
 			# I may have overcomplicated this but it's working right now
 			itemSlots[n].item = true
 			itemSlots[n].slot.fillSlot = true
