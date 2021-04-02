@@ -9,11 +9,8 @@ func _ready():
 	self.set_size(Vector2(64, 64))
 	set_texture()
 
-func set_texture(itemTexture=null, setByObject=false):
+func set_texture(itemTexture=null):
 	if(fillSlot):
-		if(setByObject):
-			dragMe.texture = itemTexture
-		else:
-			dragMe.texture = load(itemTexture)
+		dragMe.texture = load(itemTexture)
 	else:
 		dragMe.texture = emptyIcon

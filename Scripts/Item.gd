@@ -18,5 +18,6 @@ func _ready():
 
 # pickup item
 func _handle_interaction(interacted):
-	interacted.get_child(1)._add_to_inventory(self)
-	self.queue_free()
+	var interactionHandled = interacted.get_child(1)._add_to_inventory(self)
+	if(interactionHandled):
+		self.queue_free()

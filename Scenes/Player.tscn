@@ -53,7 +53,7 @@ drag_margin_right = 0.0
 drag_margin_bottom = 0.0
 
 [node name="Inventory" parent="." instance=ExtResource( 4 )]
-numSlots = 20
+numSlots = 4
 
 [node name="Stats" parent="." instance=ExtResource( 5 )]
 

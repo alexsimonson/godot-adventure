@@ -35,7 +35,14 @@ data = {
 }
 
 [node name="Item5" parent="." instance=ExtResource( 3 )]
-position = Vector2( -156.382, 79.2618 )
+position = Vector2( -184.316, 79.9969 )
+data = {
+"another": "test",
+"test": "hello"
+}
+
+[node name="Item6" parent="." instance=ExtResource( 3 )]
+position = Vector2( 36.9474, 104.99 )
 data = {
 "another": "test",
 "test": "hello"

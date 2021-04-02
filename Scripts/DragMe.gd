@@ -6,10 +6,6 @@ onready var container = self.get_parent()
 func _on_DragMe_mouse_entered():
 	Inventory._set_hover_vars(self)
 
-	# if(!container.fillSlot && Inventory.isDragging):
-	# 	print('testing when this happens')
-	# 	Inventory.setOGPosition(self)
-
 func _on_DragMe_gui_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT && event.pressed:
@@ -30,14 +26,12 @@ func _on_DragMe_gui_input(event):
 
 func _pickup_item_logic():
 	print('there is something in this slot')
-	print('testing: ', Inventory.hoverIcon)
+	print('testing: ', Inventory.hoverRef.texture)
 	Inventory.draggingElement = Sprite.new()
-	Inventory.draggingElement.texture = Inventory.hoverIcon
+	Inventory.draggingElement.texture = Inventory.hoverRef.texture
 	Inventory.add_child(Inventory.draggingElement)
 	Inventory.hoverRef.texture = Inventory.emptyIcon
 	Inventory.hoverRef.get_parent().fillSlot = false
-	# container.fillSlot = false
-	# container.set_texture()
 	Inventory.isDragging = true
 
 func  _place_item_logic():
@@ -46,9 +40,6 @@ func  _place_item_logic():
 	Inventory.remove_child(Inventory.draggingElement)
 	Inventory.isDragging = false
 	Inventory.hoverRef.get_parent().fillSlot = true
-	# Inventory.resetPosition()
-	# container.fillSlot = true
-	# container.set_texture(Inventory.draggingTexture, true)
 
 func _exchange_item_logic():
 	print('we should exchange items')

@@ -13,15 +13,11 @@ var gridGUI = null
 
 var itemSlots = []
 
-
-
-
 func _ready():
 	for n in numSlots:
 		var itemSlot = {
 			"item": null,
 			"slot": null,
-			"textureLocation": null	# I should figure out if I need this...
 		}
 		itemSlots.append(itemSlot)
 	create_inventory_ui()
@@ -54,7 +50,6 @@ func create_inventory_ui():
 		slot.fillSlot = false
 		itemSlots[n].item = false
 		itemSlots[n].slot = slot
-		itemSlots[n].textureLocation = emptyIconLocation
 		grid.add_child(slot)
 	gui.add_child(inventoryRoot)
 	hudInventory = inventoryRoot
@@ -66,12 +61,9 @@ func _add_to_inventory(item):
 	for n in numSlots:
 		# if slot doesn't have item, add item to slot
 		if(itemSlots[n].item==false):
-			# I may have overcomplicated this but it's working right now
 			itemSlots[n].item = true
 			itemSlots[n].slot.fillSlot = true
 			itemSlots[n].slot.set_texture(item.randomItem.itemTexture)
-			itemSlots[n].textureLocation = item.randomItem.itemTexture
 			added = true
 			break
-	if(!added):
-		print('Your inventory must be full')
+	return added

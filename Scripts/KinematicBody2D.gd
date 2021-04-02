@@ -65,10 +65,6 @@ func _area_exited(someArea):
 	interactObj = null
 	itemInteract = false
 	itemInteract = false
-		
-func _pickup_item(item):
-	print('Attempting to pickup item here')
-	Inventory._add_to_inventory(item)
 
 func get_input():
 	velocity = Vector2()
