@@ -7,6 +7,13 @@ var ogPosition = null
 var ogContainer = null
 var ogSet = false
 export(int) var numSlots
+
+# new hover variables
+var hoverIcon = null
+var hoverRef = null
+var dragIcon = null
+var dragRef = null
+
 onready var yeGC = $ScrollContainer/GridContainer
 
 const emptyIcon = preload('res://Icons/plain-square.png')
@@ -32,6 +39,12 @@ func setOGPosition(element):
 	ogPosition = element.rect_position
 	ogContainer = element.get_parent()
 	ogSet = true
+
+func _set_hover_vars(hoveredElement):
+	print('should set some hover stuff')
+	hoverRef = hoveredElement
+	hoverIcon = hoveredElement.texture
+	print('hoverIcon', hoverIcon)
 
 func resetPosition():
 	print('resetting position')

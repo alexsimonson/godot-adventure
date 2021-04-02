@@ -55,7 +55,7 @@ func _area_entered(someArea):
 		print('Could pickup this item')
 		itemInteract = true
 	elif(interactObj.is_in_group('npc')):
-		print('we should talk to this cunt')
+		print('we should talk to this cunt')	
 		npcInteract = true
 
 func _area_exited(someArea):
@@ -102,8 +102,13 @@ func get_input():
 	if (Input.is_action_just_pressed('interact') && canInteract):
 		print('calling fuckin')
 		# item interaction passes self, we should branch because of that...
+		
+		# we need to figure out how to determine precedence over interacted items
 		if(itemInteract):
-			interactObj._handle_interaction(self.get_parent())
+			if(interactObj.is_in_group('item')):
+				interactObj._handle_interaction(self.get_parent())
+			else:
+				print('preventing error')
 		elif(npcInteract):
 			interactObj._handle_interaction()
 

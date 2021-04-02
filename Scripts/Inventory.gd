@@ -13,6 +13,9 @@ var gridGUI = null
 
 var itemSlots = []
 
+
+
+
 func _ready():
 	for n in numSlots:
 		var itemSlot = {
