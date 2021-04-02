@@ -6,6 +6,7 @@ export var data = {
 
 # how do I access itemHub here?
 onready var itemHub = get_node('/root/ItemHub')
+onready var currentScene = get_node('/root/Main/CurrentSceneContainer').get_child(0)
 
 onready var spr = self.get_child(0)
 var randomItem = null

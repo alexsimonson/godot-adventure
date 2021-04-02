@@ -18,15 +18,12 @@ func _on_DragMe_gui_input(event):
 			else:				
 				if(container.fillSlot):
 					_pickup_item_logic()
-				else:
-					print('nothing in this slot!')
 		elif event.button_index == BUTTON_RIGHT && !event.pressed:
 			print('right click pressed')
 
 
 func _pickup_item_logic():
-	print('there is something in this slot')
-	print('testing: ', Inventory.hoverRef.texture)
+	# print('there is something in this slot')
 	Inventory.draggingElement = Sprite.new()
 	Inventory.draggingElement.texture = Inventory.hoverRef.texture
 	Inventory.add_child(Inventory.draggingElement)
@@ -35,14 +32,14 @@ func _pickup_item_logic():
 	Inventory.isDragging = true
 
 func  _place_item_logic():
-	print('we should drop this item in this slot')
+	# print('we should drop this item in this slot')
 	Inventory.hoverRef.texture = Inventory.draggingElement.texture
 	Inventory.remove_child(Inventory.draggingElement)
 	Inventory.isDragging = false
 	Inventory.hoverRef.get_parent().fillSlot = true
 
 func _exchange_item_logic():
-	print('we should exchange items')
+	# print('we should exchange items')
 	var curSlotTexture = Inventory.hoverRef.texture
 	var dragSlotTexture = Inventory.draggingElement.texture
 	Inventory.hoverRef.texture = dragSlotTexture

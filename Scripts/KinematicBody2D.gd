@@ -51,11 +51,8 @@ func _area_entered(someArea):
 	interactObj = someArea.get_parent()
 	canInteract = true
 	if(interactObj.is_in_group('item')):
-		# canInteract will control the gui tooltip mostly
-		print('Could pickup this item')
 		itemInteract = true
 	elif(interactObj.is_in_group('npc')):
-		print('we should talk to this cunt')	
 		npcInteract = true
 
 func _area_exited(someArea):
@@ -82,7 +79,7 @@ func get_input():
 		if(!Inventory.hudInventory.visible):
 			shoot()
 	if Input.is_action_just_pressed('right_click'):
-		print('nothing yet on right click')
+		Inventory._drop_item(self.position)
 
 	if Input.is_action_pressed('sneak') && !sneaking:
 		sneaking = true
@@ -96,7 +93,6 @@ func get_input():
 		print('toggle inventory on/off')
 		Inventory.hudInventory.visible = !Inventory.hudInventory.visible
 	if (Input.is_action_just_pressed('interact') && canInteract):
-		print('calling fuckin')
 		# item interaction passes self, we should branch because of that...
 		
 		# we need to figure out how to determine precedence over interacted items

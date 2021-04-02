@@ -2,21 +2,25 @@ extends Node
 
 onready var gui = get_node('/root/Main/GUI')
 export(int) var numSlots
-const emptyIconLocation = 'res://Icons/plain-square.png'
+const emptyIcon = preload('res://Icons/plain-square.png')
 
 const gridSlot = preload('res://Scenes/GridSlot.tscn')
 
 const InventoryUIScript = preload('res://Scripts/InventoryUI.gd')
+
+const Item = preload('res://Scenes/Item.tscn')
 var hudInventory = null
 
 var gridGUI = null
 
 var itemSlots = []
 
+# to handle dropping an item to the ground, I need to be able to identify the current scene
+onready var currentScene = get_node('/root/Main/CurrentSceneContainer').get_child(0)
+
 func _ready():
 	for n in numSlots:
 		var itemSlot = {
-			"item": null,
 			"slot": null,
 		}
 		itemSlots.append(itemSlot)
@@ -48,7 +52,6 @@ func create_inventory_ui():
 	for n in numSlots:
 		var slot = gridSlot.instance()
 		slot.fillSlot = false
-		itemSlots[n].item = false
 		itemSlots[n].slot = slot
 		grid.add_child(slot)
 	gui.add_child(inventoryRoot)
@@ -60,10 +63,21 @@ func _add_to_inventory(item):
 	var added = false
 	for n in numSlots:
 		# if slot doesn't have item, add item to slot
-		if(itemSlots[n].item==false):
-			itemSlots[n].item = true
+		if(itemSlots[n].slot.fillSlot==false):
 			itemSlots[n].slot.fillSlot = true
 			itemSlots[n].slot.set_texture(item.randomItem.itemTexture)
 			added = true
 			break
 	return added
+
+func _drop_item(dropPosition):
+	print('drop Posittion: ', dropPosition)
+	print('drop item on ground if applicable')
+	if(hudInventory.hoverRef):
+		if(hudInventory.hoverRef.get_parent().fillSlot):
+			print('we should drop this shit')
+			hudInventory.hoverRef.get_parent().fillSlot = false
+			hudInventory.hoverRef.texture = emptyIcon
+			var droppedItem = load('res://Scenes/Item.tscn').instance()
+			droppedItem.position = dropPosition
+			currentScene.add_child(droppedItem)
