@@ -2,6 +2,8 @@ extends Node
 
 onready var gui = get_node('/root/Main/GUI')
 onready var itemHub = get_node('/root/ItemHub')
+# onready var CurrentSceneContainer = get_node('/root/Main/CurrentSceneContainer')
+onready var playerRef = get_node('/root/Main/CurrentSceneContainer').get_child(0).get_node('Player').get_child(0)
 
 var width = 420
 var height = 369
@@ -180,4 +182,7 @@ func _on_player_decision(option):
 	if(option.logic):
 		_replace_dialogue_options(option.next)
 	else:
+		# leave the conversation
+		playerRef.removeControl = false
+		get_parent().inConversation = false
 		gui.remove_child(currentDialogueRoot)

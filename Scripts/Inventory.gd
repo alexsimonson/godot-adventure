@@ -71,11 +71,8 @@ func _add_to_inventory(item):
 	return added
 
 func _drop_item(dropPosition):
-	print('drop Posittion: ', dropPosition)
-	print('drop item on ground if applicable')
 	if(hudInventory.hoverRef):
 		if(hudInventory.hoverRef.get_parent().fillSlot):
-			print('we should drop this shit')
 			hudInventory.hoverRef.get_parent().fillSlot = false
 			hudInventory.hoverRef.texture = emptyIcon
 			var droppedItem = load('res://Scenes/Item.tscn').instance()

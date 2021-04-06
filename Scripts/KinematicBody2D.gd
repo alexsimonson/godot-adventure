@@ -5,6 +5,7 @@ extends KinematicBody2D
 export var speed = 200
 export var sneakModifier = 2
 
+var removeControl = false
 var sneaking = false
 var holding = false
 var endangeringSelf = false
@@ -14,7 +15,7 @@ var velocity = Vector2.ZERO
 onready var Inventory = get_parent().get_child(1)
 
 # this bool should be enough, PROVIDED that all my interaction OBJECTS have a class with the same name which they should because OOP
-var canInteract = false
+var proximityInteract = false
 var itemInteract = false
 var npcInteract = false
 
@@ -29,7 +30,7 @@ func _ready():
 	print('player ready')
 
 func _physics_process(delta):
-	if(!holding):
+	if(!holding && !removeControl):
 		look_at(get_global_mouse_position())
 	get_input()
 	velocity = move_and_slide(velocity)
@@ -49,7 +50,7 @@ func _test_body(someArea):
 func _area_entered(someArea):
 	# logic should be created to prioritize areas, etc.
 	interactObj = someArea.get_parent()
-	canInteract = true
+	proximityInteract = true
 	if(interactObj.is_in_group('item')):
 		itemInteract = true
 	elif(interactObj.is_in_group('npc')):
@@ -58,12 +59,16 @@ func _area_entered(someArea):
 func _area_exited(someArea):
 	# the logic here is causing bugs... figure out a better solution!
 	# is it possible to rescan the areas?  PROBABLY
-	canInteract = false
+	proximityInteract = false
 	interactObj = null
 	itemInteract = false
 	itemInteract = false
 
-func get_input():
+func cancel_movement():
+	velocity = Vector2(0, 0)
+
+func calculate_movement():
+	# calculate movement
 	velocity = Vector2()
 	if Input.is_action_pressed('right'):
 		velocity.x += 1
@@ -74,11 +79,24 @@ func get_input():
 	if Input.is_action_pressed('up'):
 		velocity.y -= 1
 	velocity = velocity.normalized() * speed
+
+func primary_action():
+	# handle primary action
 	if Input.is_action_just_pressed('click'):
 		# I might need to use a specific boolean here instead.  Will find out in time.
 		if(!Inventory.hudInventory.visible):
 			shoot()
+
+func get_input():
+	# lock certain things behind control
+	if(!removeControl):
+		calculate_movement()
+		primary_action()
+	else:
+		cancel_movement()
 	if Input.is_action_just_pressed('right_click'):
+		# maybe this should spawn a dropdown UI at mouse_location on GUI
+
 		Inventory._drop_item(self.position)
 
 	if Input.is_action_pressed('sneak') && !sneaking:
@@ -92,7 +110,7 @@ func get_input():
 	if (Input.is_action_just_pressed('inventory')):
 		print('toggle inventory on/off')
 		Inventory.hudInventory.visible = !Inventory.hudInventory.visible
-	if (Input.is_action_just_pressed('interact') && canInteract):
+	if (Input.is_action_just_pressed('interact') && proximityInteract):
 		# item interaction passes self, we should branch because of that...
 		
 		# we need to figure out how to determine precedence over interacted items
@@ -102,7 +120,11 @@ func get_input():
 			else:
 				print('preventing error')
 		elif(npcInteract):
-			interactObj._handle_interaction()
+			print('should be interacting with npc?')
+			# we should get something back from this interaction that tells us we're engaged in conversation
+			# this should be a bool
+			look_at(interactObj.position)
+			removeControl = interactObj._handle_interaction(self)
 
 func shoot():
 	$Gun.fire()

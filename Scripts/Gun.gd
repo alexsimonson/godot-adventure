@@ -3,7 +3,8 @@ extends Node2D
 onready var Bullet = preload("res://Scenes/Bullet.tscn")
 
 func _physics_process(delta):
-	look_at(get_global_mouse_position())
+	if(!get_parent().removeControl):
+		look_at(get_global_mouse_position())
 
 func fire():
 	var b = Bullet.instance()
